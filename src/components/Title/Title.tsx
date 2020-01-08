@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 
-export const Title: React.FC = props => {
+interface TitleProps {
+  title: string;
+}
+
+export const Title: React.FC<TitleProps> = props => {
   return (
     <div>
-      <h2 className="calculator-title">Fix me!</h2>
+      <h2 className="calculator-title">{props.title}</h2>
     </div>
   );
 };

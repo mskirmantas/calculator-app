@@ -4,6 +4,10 @@ import { Title } from "./Title/Title";
 import { Input } from "./Input/Input";
 import { Buttons } from "./Buttons/Buttons";
 
+interface CalculatorProps {
+  calcName: string;
+}
+
 const characters = [
   "1",
   "2",
@@ -24,10 +28,10 @@ const characters = [
   "C"
 ];
 
-export const Calculator: React.FC = () => {
+export const Calculator: React.FC<CalculatorProps> = props => {
   return (
     <div className="calculator">
-      <Title />
+      <Title title={props.calcName} />
       <Input />
       <Buttons characters={characters} />
     </div>
