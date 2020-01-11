@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Title } from "./Title/Title";
+import React from "react";
 
 interface RequirementsProps {
   name: string;
