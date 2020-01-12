@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface TitleProps {
   title: string;
+  onNameChange: any;
 }
 
 export const Title: React.FC<TitleProps> = props => {

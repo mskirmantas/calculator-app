@@ -1,19 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
 interface DigitsProps {
-  characters: any;
+  numbers: any;
+  symbols: any;
+  onNumberButtonClick: any;
+  onDotButtonClick: any;
+  calculateResult: any;
 }
 
 export const Digits: React.FC<DigitsProps> = props => {
-  const mathOperator = (val: any) => {
-    return isNaN(val) && val !== "." && val !== "=" && val !== "C";
-  };
   return (
     <div className="Digits">
-      {props.characters.map((character: string) => {
-        if (!mathOperator(character) && character !== "C")
-          return <CalcButton key={character} char={character} onButtonClick />;
+      {props.numbers.map((number: number) => {
+        return (
+          <CalcButton
+            key={number}
+            char={number}
+            onClick={() => props.onNumberButtonClick(number)}
+          />
+        );
+      })}
+
+      {props.symbols.map((symbol: string) => {
+        if (symbol === ".")
+          return (
+            <CalcButton
+              key={symbol}
+              char={symbol}
+              onClick={props.onDotButtonClick}
+            />
+          );
+        else if (symbol === "=")
+          return (
+            <CalcButton
+              key={symbol}
+              char={symbol}
+              onClick={props.calculateResult}
+            />
+          );
+        else {
+          return null;
+        }
       })}
     </div>
   );

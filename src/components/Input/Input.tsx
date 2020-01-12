@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const Input: React.FC = props => {
+interface InputProps {
+  input: any;
+}
+
+export const Input: React.FC<InputProps> = props => {
   return (
     <div className="input">
-      <h1 className="result">24</h1>
-      <h2 className="result-small">0</h2>
+      <h1 className="result">R</h1>
+      <h2 className="result-small">{props.input}</h2>
     </div>
   );
 };

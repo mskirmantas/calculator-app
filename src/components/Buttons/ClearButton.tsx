@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
 interface ClearButtonProps {
-  characters: any;
+  symbols: any;
+  onButtonClick: any;
 }
 
 export const ClearButton: React.FC<ClearButtonProps> = props => (
   <div className="ClearButton">
-    {props.characters.map((character: string) => {
-      if (character === "C")
-        return <CalcButton key={character} char={character} onButtonClick />;
+    {props.symbols.map((symbol: string) => {
+      if (symbol === "C")
+        return (
+          <CalcButton
+            key={symbol}
+            char={symbol}
+            onClick={props.onButtonClick}
+          />
+        );
+      else {
+        return null;
+      }
     })}
   </div>
 );

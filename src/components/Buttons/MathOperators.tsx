@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
 interface MathOperatorsProps {
-  characters: any;
+  symbols: any;
+  onOperatorButtonClick: any;
 }
 
 export const MathOperators: React.FC<MathOperatorsProps> = props => {
@@ -11,9 +12,18 @@ export const MathOperators: React.FC<MathOperatorsProps> = props => {
   };
   return (
     <div className="MathOperators">
-      {props.characters.map((character: string) => {
-        if (mathOperator(character))
-          return <CalcButton key={character} char={character} onButtonClick />;
+      {props.symbols.map((symbol: string) => {
+        if (mathOperator(symbol))
+          return (
+            <CalcButton
+              key={symbol}
+              char={symbol}
+              onClick={() => props.onOperatorButtonClick(symbol)}
+            />
+          );
+        else {
+          return null;
+        }
       })}
     </div>
   );
