@@ -1,7 +1,7 @@
 $btn-color: rgb(214, 214, 214);
 $operator-btn-color: rgb(219, 155, 52);
-$clear-btn-color: rgb(120, 161, 195);
-$active-btn-color: rgb(71, 71, 71);
+$clear-btn-color: rgb(90, 144, 189);
+$active-btn-color: rgb(61, 64, 68);
 $input-color: rgb(36, 36, 36);
 $color-dark: rgb(41, 41, 41);
 $color-bright: rgb(250, 250, 250);
@@ -14,15 +14,41 @@ $color-bright: rgb(250, 250, 250);
   display: flex;
   flex-direction: row;
 }
-
+h2 {
+  margin: 0;
+  padding: 2px 0px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: $color-dark;
+}
+input {
+  padding: 1px 3px;
+  width: 140px;
+  height: 20px;
+  border: 1px solid $btn-color;
+  border-radius: 5px;
+  &:focus {
+    outline-color: $operator-btn-color;
+  }
+}
+.calc-name-input {
+  margin: 15px 0px;
+  display: flex;
+  justify-content: space-around;
+  height: 30px;
+  width: 328px;
+}
 .calculator {
   text-align: center;
   width: 328px;
   height: 100%;
-  // border: solid 1px $color-dark;
   margin: 0 50px;
   display: flex;
   flex-direction: column;
+}
+.calc-container {
+  border: solid 1px $color-bright;
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.35);
 }
 
 .calculator-title {
@@ -33,7 +59,7 @@ $color-bright: rgb(250, 250, 250);
 .input {
   background-color: $input-color;
   height: 149px;
-  width: calc(100% - 2px);
+  width: 100%;
   align-self: center;
   border: solid 1px $color-bright;
 }
@@ -53,9 +79,9 @@ $color-bright: rgb(250, 250, 250);
 
 .result-small {
   margin: 0;
-  padding: 15px 25px;
+  padding: 0px 25px;
   font-size: 1.2rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .ButtonWrapper {
@@ -80,7 +106,7 @@ $color-bright: rgb(250, 250, 250);
   margin: 0;
   cursor: pointer;
   font-size: 1.2rem;
-  font-weight: 400;
+  font-weight: 500;
   color: $color-dark;
   background-color: $btn-color;
   &:hover {
@@ -103,7 +129,7 @@ $color-bright: rgb(250, 250, 250);
     background-color: $operator-btn-color;
     color: $color-bright;
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 500;
     &:active {
       background-color: $active-btn-color;
     }
@@ -117,7 +143,7 @@ $color-bright: rgb(250, 250, 250);
     color: $color-bright;
     width: 100%;
     font-size: 1.4rem;
-    font-weight: 400;
+    font-weight: 500;
     &:active {
       background-color: $active-btn-color;
     }

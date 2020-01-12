@@ -8,8 +8,8 @@ interface InputProps {
 export const Input: React.FC<InputProps> = props => {
   return (
     <div className="input">
-      <h1 className="result">{props.result}</h1>
-      <h2 className="result-small">{props.input}</h2>
+      <h3 className="result">{props.result}</h3>
+      <h4 className="result-small">{props.input}</h4>
     </div>
   );
 };

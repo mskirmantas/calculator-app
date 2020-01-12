@@ -5,14 +5,19 @@ import { Input } from "./Input/Input";
 import { ButtonWrapper } from "./Buttons/ButtonWrapper";
 import * as math from "mathjs";
 
-interface CalculatorProps {
-  calcName: string;
-}
-
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const symbols = ["+", "-", "*", "/", ".", "=", "C", "AC"];
 
-export const Calculator: React.FC<CalculatorProps> = props => {
+export const Calculator: React.FC = props => {
+  const [name, setName] = useState("Mantas' Calculator");
+
+  const nameChangeHandler = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setName(event.target.value);
+    clearDisplay();
+  };
+
   const [input, setValue] = useState("0");
   const [result, setResult] = useState("");
 
@@ -79,18 +84,20 @@ export const Calculator: React.FC<CalculatorProps> = props => {
 
   return (
     <div className="calculator">
-      <Title title={props.calcName} onNameChange={clearDisplay} />
-      <Input input={input} result={result} />
-      <ButtonWrapper
-        symbols={symbols}
-        numbers={numbers}
-        handleNumberClick={addNumber}
-        handleOperatorClick={addOperator}
-        handleDotClick={addDot}
-        handleClear={clearDisplay}
-        handleClearLast={clearLastValue}
-        handleEqual={calculateResult}
-      />
+      <Title name={name} onNameChange={nameChangeHandler} />
+      <div className="calc-container">
+        <Input input={input} result={result} />
+        <ButtonWrapper
+          symbols={symbols}
+          numbers={numbers}
+          handleNumberClick={addNumber}
+          handleOperatorClick={addOperator}
+          handleDotClick={addDot}
+          handleClear={clearDisplay}
+          handleClearLast={clearLastValue}
+          handleEqual={calculateResult}
+        />
+      </div>
     </div>
   );
 };

@@ -1,16 +1,9 @@
 import React from "react";
 
-interface RequirementsProps {
-  name: string;
-  onNameChange: any;
-}
-
-export const Requirements: React.FC<RequirementsProps> = props => {
+export const Requirements: React.FC = () => {
   return (
     <div className="requirements">
-      <h3>Calculator's name:</h3>
-      <input value={props.name} onChange={props.onNameChange} />
-
+      <h3>Requirements:</h3>
       <ul>
         <li>
           It <strong>must</strong> be possible to perform basic calculations (+
