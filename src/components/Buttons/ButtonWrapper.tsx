@@ -1,6 +1,6 @@
 import React from "react";
-import { Digits } from "./Digits";
-import { MathOperators } from "./MathOperators";
+import { NumberButtons } from "./NumberButtons";
+import { OperatorButtons } from "./OperatorButtons";
 import { ClearButton } from "./ClearButton";
 
 interface ButtonWrapper {
@@ -9,27 +9,32 @@ interface ButtonWrapper {
   handleNumberClick: any;
   handleOperatorClick: any;
   handleDotClick: any;
+  handleClearLast: any;
   handleClear: any;
   handleEqual: any;
 }
 
 export const ButtonWrapper: React.FC<ButtonWrapper> = props => {
   return (
-    <div className="ButtonWrapper">
-      <div className="flex-container">
-        <Digits
+    <div className="ButtonWrapper flex-container">
+      <div className="container">
+        <NumberButtons
           numbers={props.numbers}
           symbols={props.symbols}
-          onNumberButtonClick={props.handleNumberClick}
-          onDotButtonClick={props.handleDotClick}
-          calculateResult={props.handleEqual}
+          onNumberClick={props.handleNumberClick}
+          onDotClick={props.handleDotClick}
+          onClearLastClick={props.handleClearLast}
         />
-        <MathOperators
+        <ClearButton
           symbols={props.symbols}
-          onOperatorButtonClick={props.handleOperatorClick}
+          onButtonClick={props.handleClear}
         />
       </div>
-      <ClearButton symbols={props.symbols} onButtonClick={props.handleClear} />
+      <OperatorButtons
+        symbols={props.symbols}
+        onOperatorButtonClick={props.handleOperatorClick}
+        onShowResultClick={props.handleEqual}
+      />
     </div>
   );
 };

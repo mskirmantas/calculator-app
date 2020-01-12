@@ -1,23 +1,23 @@
 import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
-interface DigitsProps {
+interface NumberButtonsProps {
   numbers: any;
   symbols: any;
-  onNumberButtonClick: any;
-  onDotButtonClick: any;
-  calculateResult: any;
+  onNumberClick: any;
+  onDotClick: any;
+  onClearLastClick: any;
 }
 
-export const Digits: React.FC<DigitsProps> = props => {
+export const NumberButtons: React.FC<NumberButtonsProps> = props => {
   return (
-    <div className="Digits">
+    <div className="NumberButtons">
       {props.numbers.map((number: number) => {
         return (
           <CalcButton
             key={number}
             char={number}
-            onClick={() => props.onNumberButtonClick(number)}
+            onClick={() => props.onNumberClick(number)}
           />
         );
       })}
@@ -25,18 +25,14 @@ export const Digits: React.FC<DigitsProps> = props => {
       {props.symbols.map((symbol: string) => {
         if (symbol === ".")
           return (
-            <CalcButton
-              key={symbol}
-              char={symbol}
-              onClick={props.onDotButtonClick}
-            />
+            <CalcButton key={symbol} char={symbol} onClick={props.onDotClick} />
           );
-        else if (symbol === "=")
+        else if (symbol === "C")
           return (
             <CalcButton
               key={symbol}
               char={symbol}
-              onClick={props.calculateResult}
+              onClick={props.onClearLastClick}
             />
           );
         else {

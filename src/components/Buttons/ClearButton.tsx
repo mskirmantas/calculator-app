@@ -9,7 +9,7 @@ interface ClearButtonProps {
 export const ClearButton: React.FC<ClearButtonProps> = props => (
   <div className="ClearButton">
     {props.symbols.map((symbol: string) => {
-      if (symbol === "C")
+      if (symbol === "AC")
         return (
           <CalcButton
             key={symbol}

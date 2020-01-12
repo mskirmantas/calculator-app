@@ -92,13 +92,13 @@ $color-bright: rgb(250, 250, 250);
     color: $color-bright;
   }
 }
-.Digits {
+.NumberButtons {
   width: 246px;
   display: flex;
   flex-wrap: wrap;
 }
 
-.MathOperators {
+.OperatorButtons {
   .calc-button {
     background-color: $operator-btn-color;
     color: $color-bright;
@@ -111,7 +111,7 @@ $color-bright: rgb(250, 250, 250);
 }
 
 .ClearButton {
-  width: 326px;
+  width: calc(100% - 2px);
   .calc-button {
     background-color: $clear-btn-color;
     color: $color-bright;
