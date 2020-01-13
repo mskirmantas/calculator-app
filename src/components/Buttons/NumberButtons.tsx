@@ -1,18 +1,18 @@
 import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
-interface NumberButtonsProps {
-  numbers: any;
-  symbols: any;
-  onNumberClick: any;
-  onDotClick: any;
-  onClearLastClick: any;
+interface NumberBtnProps {
+  numbers: number[];
+  symbols: string[];
+  onNumberClick: (val: number) => void;
+  onDotClick: () => void;
+  onClearLastClick: () => void;
 }
 
-export const NumberButtons: React.FC<NumberButtonsProps> = props => {
+export const NumberButtons: React.FC<NumberBtnProps> = props => {
   return (
     <div className="NumberButtons">
-      {props.numbers.map((number: number) => {
+      {props.numbers.map(number => {
         return (
           <CalcButton
             key={number}
@@ -22,7 +22,7 @@ export const NumberButtons: React.FC<NumberButtonsProps> = props => {
         );
       })}
 
-      {props.symbols.map((symbol: string) => {
+      {props.symbols.map(symbol => {
         if (symbol === ".")
           return (
             <CalcButton key={symbol} char={symbol} onClick={props.onDotClick} />

@@ -3,18 +3,18 @@ import { NumberButtons } from "./NumberButtons";
 import { OperatorButtons } from "./OperatorButtons";
 import { ClearButton } from "./ClearButton";
 
-interface ButtonWrapper {
-  symbols: any;
-  numbers: any;
-  handleNumberClick: any;
-  handleOperatorClick: any;
-  handleDotClick: any;
-  handleClearLast: any;
-  handleClear: any;
-  handleEqual: any;
+export interface ButtonWrapperProps {
+  symbols: string[];
+  numbers: number[];
+  handleNumberClick: (val: number) => void;
+  handleOperatorClick: (val: string) => void;
+  handleDotClick: () => void;
+  handleClearLast: () => void;
+  handleClear: () => void;
+  handleEqual: () => void | null;
 }
 
-export const ButtonWrapper: React.FC<ButtonWrapper> = props => {
+export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
   return (
     <div className="ButtonWrapper flex-container">
       <div className="container">

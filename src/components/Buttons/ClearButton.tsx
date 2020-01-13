@@ -2,13 +2,13 @@ import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
 interface ClearButtonProps {
-  symbols: any;
-  onButtonClick: any;
+  symbols: string[];
+  onButtonClick: () => void;
 }
 
 export const ClearButton: React.FC<ClearButtonProps> = props => (
   <div className="ClearButton">
-    {props.symbols.map((symbol: string) => {
+    {props.symbols.map(symbol => {
       if (symbol === "AC")
         return (
           <CalcButton
