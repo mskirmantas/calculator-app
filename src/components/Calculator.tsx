@@ -21,37 +21,46 @@ const symbols = ["+", "-", "*", "/", ".", "=", "C", "AC"];
 export const Calculator: React.FC = () => {
   const [name, setName] = useState<string>("Mantas' Calculator");
 
-  const nameChangeHandler = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setName(event.target.value);
+  const nameChangeHandler = (event: any) => {
+    const { value, maxLength } = event.target;
+    const newName = value.slice(0, maxLength);
+    setName(newName);
     clearDisplay();
   };
 
-  const [input, setValue] = useState("0");
+  const [input, setInput] = useState("0");
   const [result, setResult] = useState("");
 
+  const checkLength = (val: string, charLength: number) => {
+    if (val.length > charLength) {
+      let inputLimit = val.slice(0, charLength);
+      setInput(inputLimit);
+    }
+  };
+  checkLength(input, 26);
+  checkLength(result, 15);
+
   const addNumber = (val: number) => {
-    setValue(input + val);
+    setInput(input + val);
     if (input[input.length - 1] === "0") {
-      setValue(input.substring(0, input.length - 1) + val);
+      setInput(input.substring(0, input.length - 1) + val);
     }
     if (result !== "") {
       setResult("");
-      setValue("" + val);
+      setInput("" + val);
     }
   };
 
   const addOperator = (val: string) => {
     for (let i = 0; i < numbers.length; i++) {
       if (input !== "0" && input[input.length - 1] === numbers[i].toString()) {
-        setValue(input + val);
+        setInput(input + val);
       }
       if (input !== "0" && input[input.length - 1] === ".") {
-        setValue(input.substring(0, input.length - 1) + val);
+        setInput(input.substring(0, input.length - 1) + val);
       }
       if (result !== "") {
-        setValue(result + val);
+        setInput(result + val);
         setResult("");
       }
     }
@@ -59,23 +68,23 @@ export const Calculator: React.FC = () => {
 
   const addDot = () => {
     if (input.indexOf(".") === -1) {
-      setValue(input + ".");
+      setInput(input + ".");
     }
     for (let i = 0; i < symbols.length; i++) {
       if (input[input.length - 1] === symbols[i].toString()) {
-        setValue(input + "0.");
+        setInput(input + "0.");
       }
     }
     if (result !== "") {
       setResult("");
-      setValue("0.");
+      setInput("0.");
     }
   };
 
   const calculateResult = () => {
     for (let i = 0; i < numbers.length; i++) {
       if (input !== "0" && input[input.length - 1] === numbers[i].toString()) {
-        setValue(input + "=");
+        setInput(input + "=");
         setResult(math.evaluate(input).toString());
       }
       if (input.indexOf("=") !== -1) {
@@ -85,20 +94,20 @@ export const Calculator: React.FC = () => {
   };
 
   const clearLastValue = () => {
-    setValue(input.substring(0, input.length - 1));
+    setInput(input.substring(0, input.length - 1));
     if (input.length === 1 || input === "0") {
-      setValue("0");
+      setInput("0");
     }
   };
 
   const clearDisplay = () => {
-    setValue("0");
+    setInput("0");
     setResult("");
   };
 
   return (
     <div className="calculator">
-      <Title name={name} onNameChange={nameChangeHandler} />
+      <Title name={name} onNameChange={nameChangeHandler} maxLength={18} />
       <div className="calc-container">
         <Input input={input} result={result} />
         <ButtonWrapper

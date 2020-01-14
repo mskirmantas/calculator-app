@@ -3,6 +3,7 @@ import React from "react";
 interface TitleProps {
   onNameChange: any;
   name: string;
+  maxLength: number;
 }
 
 export const Title: React.FC<TitleProps> = props => {
@@ -11,7 +12,12 @@ export const Title: React.FC<TitleProps> = props => {
       <h1 className="calculator-title">{props.name}</h1>
       <div className="calc-name-input">
         <h2>Change calculator's name:</h2>
-        <input value={props.name} onChange={props.onNameChange} />
+        <input
+          type="text"
+          placeholder={props.name}
+          onChange={props.onNameChange}
+          maxLength={props.maxLength}
+        />
       </div>
     </div>
   );
