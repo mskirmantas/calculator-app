@@ -5,7 +5,7 @@ import "./App.scss";
 
 const App: React.FC = () => {
   return (
-    <div className="cont">
+    <div className="content">
       <Calculator />
       <Requirements />
     </div>

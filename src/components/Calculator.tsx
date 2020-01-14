@@ -21,14 +21,21 @@ export const Calculator: React.FC = () => {
   const [input, setInput] = useState<string>("0");
   const [result, setResult] = useState<string>("");
 
-  const checkLength = (val: string, charLength: number) => {
+  const checkInputLength = (val: string, charLength: number) => {
     if (val.length > charLength) {
-      let inputLimit = val.slice(0, charLength);
+      let inputLimit = val.substring(0, charLength);
       setInput(inputLimit);
     }
   };
-  checkLength(input, 26);
-  checkLength(result, 15);
+  checkInputLength(input, 22);
+
+  const checkResultLength = (val: string, charLength: number) => {
+    if (val.length > charLength) {
+      let resultLimit = val.substring(0, charLength);
+      setResult(inputLimit);
+    }
+  };
+  checkResultLength(result, 13);
 
   const addNumber = (val: number) => {
     setInput(input + val);
