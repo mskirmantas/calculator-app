@@ -1,8 +1,8 @@
 import React from "react";
 
 interface InputProps {
-  input: any;
-  result: any;
+  input: string;
+  result: string;
 }
 
 export const Input: React.FC<InputProps> = props => {

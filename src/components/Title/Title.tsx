@@ -1,7 +1,7 @@
 import React from "react";
 
 interface TitleProps {
-  onNameChange: any;
+  onNameChange: (event: React.FormEvent<HTMLInputElement>) => void;
   name: string;
   maxLength: number;
 }

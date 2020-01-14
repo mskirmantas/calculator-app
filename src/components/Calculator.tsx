@@ -5,31 +5,21 @@ import { Input } from "./Input/Input";
 import { ButtonWrapper } from "./Buttons/ButtonWrapper";
 import * as math from "mathjs";
 
-interface CalculatorProps {
-  numbers: number[];
-  symbols: string[];
-  addNumber: (val: number) => void;
-  addOperator: (val: string) => void;
-  addDot: () => void;
-  calculateResult: () => null | void;
-  clearDisplay: () => void;
-}
-
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const symbols = ["+", "-", "*", "/", ".", "=", "C", "AC"];
 
 export const Calculator: React.FC = () => {
   const [name, setName] = useState<string>("Mantas' Calculator");
 
-  const nameChangeHandler = (event: any) => {
-    const { value, maxLength } = event.target;
+  const nameChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
+    const { value, maxLength }: any = event.target;
     const newName = value.slice(0, maxLength);
     setName(newName);
     clearDisplay();
   };
 
-  const [input, setInput] = useState("0");
-  const [result, setResult] = useState("");
+  const [input, setInput] = useState<string>("0");
+  const [result, setResult] = useState<string>("");
 
   const checkLength = (val: string, charLength: number) => {
     if (val.length > charLength) {
