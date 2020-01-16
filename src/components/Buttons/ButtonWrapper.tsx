@@ -4,9 +4,8 @@ import { OperatorButtons } from "./OperatorButtons";
 import { ClearButton } from "./ClearButton";
 
 export interface ButtonWrapperProps {
-  numbers: number[];
-  mathOperators: string[];
   symbols: string[];
+  numbers: number[];
   handleNumberClick: (val: number) => void;
   handleOperatorClick: (val: string) => void;
   handleDotClick: () => void;
@@ -32,7 +31,7 @@ export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
         />
       </div>
       <OperatorButtons
-        mathOperators={props.mathOperators}
+        symbols={props.symbols}
         onOperatorButtonClick={props.handleOperatorClick}
         onShowResultClick={props.handleEqual}
       />

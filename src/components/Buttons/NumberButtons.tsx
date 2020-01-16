@@ -27,14 +27,14 @@ export const NumberButtons: React.FC<NumberBtnProps> = props => {
           return (
             <CalcButton key={symbol} char={symbol} onClick={props.onDotClick} />
           );
-        // else if (symbol === "C")
-        //   return (
-        //     <CalcButton
-        //       key={symbol}
-        //       char={symbol}
-        //       onClick={props.onClearLastClick}
-        //     />
-        //   );
+        else if (symbol === "C")
+          return (
+            <CalcButton
+              key={symbol}
+              char={symbol}
+              onClick={props.onClearLastClick}
+            />
+          );
         else {
           return null;
         }
