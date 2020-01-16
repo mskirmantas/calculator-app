@@ -16,8 +16,8 @@ export interface ButtonWrapperProps {
 
 export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
   return (
-    <div className="ButtonWrapper flex-container">
-      <div className="container">
+    <div className="ButtonWrapper">
+      <div>
         <NumberButtons
           numbers={props.numbers}
           symbols={props.symbols}

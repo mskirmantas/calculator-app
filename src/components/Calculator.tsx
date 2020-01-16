@@ -123,9 +123,9 @@ export const Calculator: React.FC = () => {
   checkInputLength();
 
   return (
-    <div className="calculator">
+    <div className="container">
       <Title name={name} onNameChange={nameChangeHandler} maxLength={18} />
-      <div className="calc-container">
+      <div className="calculator">
         <Display input={input} operations={operations} />
         <ButtonWrapper
           symbols={symbols}

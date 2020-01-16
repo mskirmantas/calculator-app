@@ -16,9 +16,21 @@ $color-operations: rgb(167, 173, 179);
   flex-direction: row;
 }
 
+.container {
+  text-align: center;
+  width: 328px;
+  height: 100%;
+  margin: 0 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+// TITLE ------------------------
+
 .title-block {
   height: 130px;
 }
+
 h2 {
   margin: 0;
   padding: 2px 0px;
@@ -26,6 +38,7 @@ h2 {
   font-weight: 500;
   color: $color-dark;
 }
+
 .name-changer {
   padding: 1px 3px;
   width: 140px;
@@ -36,6 +49,7 @@ h2 {
     outline-color: $operator-btn-color;
   }
 }
+
 .calc-name-input {
   margin: 15px 0px;
   display: flex;
@@ -43,15 +57,10 @@ h2 {
   height: 30px;
   width: 328px;
 }
+
+// DISPLAY ----------------------
+
 .calculator {
-  text-align: center;
-  width: 328px;
-  height: 100%;
-  margin: 0 50px;
-  display: flex;
-  flex-direction: column;
-}
-.calc-container {
   border: solid 1px $color-bright;
   box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.35);
 }
@@ -78,7 +87,6 @@ h2 {
 .input {
   margin: 0;
   height: 90px;
-
   h3 {
     color: $color-bright;
     margin: 0;
@@ -93,7 +101,6 @@ h2 {
   height: 60px;
   display: flex;
   justify-content: flex-end;
-
   h4 {
     color: $color-operations;
     margin: 0;
@@ -104,15 +111,10 @@ h2 {
   }
 }
 
+// BUTTON WRAPPER ---------------
+
 .ButtonWrapper {
   text-align: center;
-  width: 328px;
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.flex-container {
   display: flex;
 }
 
@@ -177,15 +179,15 @@ h2 {
   }
 }
 
+// REQUIREMENTS -----------------
+
 .requirements {
   margin: 0 100px;
-
   code {
     background-color: ivory;
     font-family: monospace;
     letter-spacing: 0.1em;
   }
-
   ul {
     margin: 32px 0 0 -40px;
   }
