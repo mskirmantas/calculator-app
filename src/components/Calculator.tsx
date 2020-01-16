@@ -6,10 +6,14 @@ import { ButtonWrapper } from "./Buttons/ButtonWrapper";
 import * as math from "mathjs";
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const symbols = ["+", "-", "*", "/", ".", "=", "C", "AC"];
+const symbols = [".", "C", "AC"];
+const mathOperators = ["+", "-", "*", "/", "="];
 
 export const Calculator: React.FC = () => {
   const [name, setName] = useState<string>("Mantas' Calculator");
+  const [input, setInput] = useState<string>("");
+  const [operations, setOperations] = useState<string>("");
+  const [result, setResult] = useState<string>("");
 
   const nameChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     const { value, maxLength }: any = event.target;
@@ -18,48 +22,61 @@ export const Calculator: React.FC = () => {
     clearDisplay();
   };
 
-  const [input, setInput] = useState<string>("0");
-  const [result, setResult] = useState<string>("");
-
-  const checkInputLength = (val: string, charLength: number) => {
-    if (val.length > charLength) {
-      let inputLimit = val.substring(0, charLength);
-      setInput(inputLimit);
-    }
-  };
-  checkInputLength(input, 22);
-
-  const checkResultLength = (val: string, charLength: number) => {
-    if (val.length > charLength) {
-      let resultLimit = val.substring(0, charLength);
-      setResult(inputLimit);
-    }
-  };
-  checkResultLength(result, 13);
+  // MATH ACTIONS ===========================================
 
   const addNumber = (val: number) => {
     setInput(input + val);
-    if (input[input.length - 1] === "0") {
-      setInput(input.substring(0, input.length - 1) + val);
-    }
-    if (result !== "") {
-      setResult("");
+
+    //kai inputas tuscias arba lygus 0
+    if (input === "" || input === "0") {
       setInput("" + val);
+    }
+    if (operations[operations.length - 1] === "=") {
+      setOperations("");
+      setInput("" + val);
+    }
+
+    //kai pries tai buvo taskas
+    if (input[input.length - 1] === ".") {
+      setInput(input + val);
+    }
+
+    //kai pries tai buvo operatorius
+    for (let i = 0; i < mathOperators.length; i++) {
+      if (input[input.length - 1] === mathOperators[i]) {
+        setInput("" + val);
+        setOperations(operations + input);
+      }
     }
   };
 
   const addOperator = (val: string) => {
+    //kai pries tai buvo skaicius
     for (let i = 0; i < numbers.length; i++) {
-      if (input !== "0" && input[input.length - 1] === numbers[i].toString()) {
-        setInput(input + val);
+      if (input[input.length - 1] === numbers[i].toString()) {
+        setInput(val);
+        setOperations(operations + input);
       }
-      if (input !== "0" && input[input.length - 1] === ".") {
+    }
+    // kai pries tai buvo operatorius
+    for (let k = 0; k < mathOperators.length; k++) {
+      if (input[input.length - 1] === mathOperators[k]) {
         setInput(input.substring(0, input.length - 1) + val);
       }
-      if (result !== "") {
-        setInput(result + val);
-        setResult("");
-      }
+    }
+    // kai pries tai buvo taskas
+    if (input[input.length - 1] === ".") {
+      setOperations(operations + input.substring(0, input.length - 1));
+      setInput(val);
+    }
+    // kai pries tai buvo paskaiciuotas rezultatas
+    if (operations[operations.length - 1] === "=") {
+      setInput(val);
+      setOperations(input);
+    }
+    if (input === "Infinity" || input === "-Infinity") {
+      setInput("");
+      setOperations("");
     }
   };
 
@@ -67,49 +84,92 @@ export const Calculator: React.FC = () => {
     if (input.indexOf(".") === -1) {
       setInput(input + ".");
     }
-    for (let i = 0; i < symbols.length; i++) {
-      if (input[input.length - 1] === symbols[i].toString()) {
-        setInput(input + "0.");
+    if (input === "") {
+      setInput("0.");
+    }
+
+    for (let i = 0; i < mathOperators.length; i++) {
+      if (input[input.length - 1] === mathOperators[i]) {
+        setInput("0.");
+        setOperations(operations + input);
       }
     }
-    if (result !== "") {
-      setResult("");
+
+    if (operations[operations.length - 1] === "=") {
       setInput("0.");
+      setOperations("");
     }
   };
 
   const calculateResult = () => {
     for (let i = 0; i < numbers.length; i++) {
-      if (input !== "0" && input[input.length - 1] === numbers[i].toString()) {
-        setInput(input + "=");
-        setResult(math.evaluate(input).toString());
+      if (input !== "" && input[input.length - 1] === numbers[i].toString()) {
+        setOperations(operations + input + "=");
+        setInput(math.evaluate(operations + input).toString());
       }
-      if (input.indexOf("=") !== -1) {
+
+      if (operations.indexOf("=") !== -1) {
         return null;
       }
+    }
+    for (let k = 0; k < mathOperators.length; k++) {
+      if (input[input.length - 1] === mathOperators[k]) {
+        setOperations(operations + "=");
+        setInput(math.evaluate(operations).toString());
+      }
+    }
+
+    if (input[input.length - 1] === ".") {
+      setOperations(operations + input.substring(0, input.length - 1) + "=");
+      setInput(
+        math
+          .evaluate(operations + input.substring(0, input.length - 1))
+          .toString()
+      );
     }
   };
 
   const clearLastValue = () => {
     setInput(input.substring(0, input.length - 1));
-    if (input.length === 1 || input === "0") {
-      setInput("0");
-    }
   };
+  console.log(input);
 
   const clearDisplay = () => {
-    setInput("0");
-    setResult("");
+    setInput("");
+    setOperations("");
+    // setResult("");
   };
+
+  // CHECK LENGTH ===========================================
+
+  // const checkInputLength = (val: string, charLength: number) => {
+  //   if (val.length > charLength) {
+  //     let inputLimit = val.substring(0, charLength);
+  //     setInput(inputLimit);
+  //   }
+  // };
+  // checkInputLength(input, 5);
+
+  // const errorMesagge: string = "Error";
+
+  // const checkResultLength = (val: string, charLength: number) => {
+  //   if (val.length > charLength && val !== errorMesagge) {
+  //     setResult(errorMesagge);
+  //     setInput("");
+  //   }
+  // };
+  // checkResultLength(result, 8);
 
   return (
     <div className="calculator">
       <Title name={name} onNameChange={nameChangeHandler} maxLength={18} />
       <div className="calc-container">
-        <Input input={input} result={result} />
+        {/* reikia pakeist! ------> */}
+        <Input input={operations} result={input} />
         <ButtonWrapper
           symbols={symbols}
           numbers={numbers}
+          mathOperators={mathOperators}
           handleNumberClick={addNumber}
           handleOperatorClick={addOperator}
           handleDotClick={addDot}

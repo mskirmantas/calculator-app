@@ -2,31 +2,28 @@ import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
 interface OperatorBtnProps {
-  symbols: string[];
+  mathOperators: string[];
   onOperatorButtonClick: (val: string) => void;
   onShowResultClick: () => void | null;
 }
 
 export const OperatorButtons: React.FC<OperatorBtnProps> = props => {
-  const isOperator: (val: string) => boolean = val => {
-    return val !== "." && val !== "C" && val !== "AC";
-  };
   return (
     <div className="OperatorButtons">
-      {props.symbols.map(symbol => {
-        if (isOperator(symbol) && symbol !== "=") {
+      {props.mathOperators.map(mathOperator => {
+        if (mathOperator !== "=") {
           return (
             <CalcButton
-              key={symbol}
-              char={symbol}
-              onClick={() => props.onOperatorButtonClick(symbol)}
+              key={mathOperator}
+              char={mathOperator}
+              onClick={() => props.onOperatorButtonClick(mathOperator)}
             />
           );
-        } else if (symbol === "=") {
+        } else if (mathOperator === "=") {
           return (
             <CalcButton
-              key={symbol}
-              char={symbol}
+              key={mathOperator}
+              char={mathOperator}
               onClick={props.onShowResultClick}
             />
           );
