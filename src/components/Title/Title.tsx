@@ -8,11 +8,12 @@ interface TitleProps {
 
 export const Title: React.FC<TitleProps> = props => {
   return (
-    <div>
+    <div className="title-block">
       <h1 className="calculator-title">{props.name}</h1>
       <div className="calc-name-input">
         <h2>Change calculator's name:</h2>
         <input
+          className="name-changer"
           type="text"
           placeholder={props.name}
           onChange={props.onNameChange}

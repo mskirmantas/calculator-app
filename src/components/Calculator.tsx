@@ -6,7 +6,7 @@ import { ButtonWrapper } from "./ButtonWrapper/ButtonWrapper";
 import * as math from "mathjs";
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const symbols = [".", "C", "AC"];
+const symbols = [".", "AC"];
 const mathOperators = ["+", "-", "*", "/", "="];
 
 export const Calculator: React.FC = () => {
@@ -23,24 +23,21 @@ export const Calculator: React.FC = () => {
 
   const addNumber = (val: number) => {
     setInput(input + val);
-
     if (input === "" || input === "0") {
       setInput("" + val);
     }
-    if (operations[operations.length - 1] === "=") {
-      setOperations("");
-      setInput("" + val);
-    }
-
     if (input[input.length - 1] === ".") {
       setInput(input + val);
     }
-
     for (let i = 0; i < mathOperators.length; i++) {
       if (input[input.length - 1] === mathOperators[i]) {
         setInput("" + val);
         setOperations(operations + input);
       }
+    }
+    if (operations[operations.length - 1] === "=") {
+      setOperations("");
+      setInput("" + val);
     }
   };
 
@@ -51,18 +48,15 @@ export const Calculator: React.FC = () => {
         setOperations(operations + input);
       }
     }
-
     for (let k = 0; k < mathOperators.length; k++) {
       if (input[input.length - 1] === mathOperators[k]) {
         setInput(input.substring(0, input.length - 1) + val);
       }
     }
-
     if (input[input.length - 1] === ".") {
-      setOperations(operations + input.substring(0, input.length - 1));
       setInput(val);
+      setOperations(operations + input.substring(0, input.length - 1));
     }
-
     if (operations[operations.length - 1] === "=") {
       setInput(val);
       setOperations(input);
@@ -77,17 +71,12 @@ export const Calculator: React.FC = () => {
     if (input.indexOf(".") === -1) {
       setInput(input + ".");
     }
-    if (input === "") {
-      setInput("0.");
-    }
-
     for (let i = 0; i < mathOperators.length; i++) {
-      if (input[input.length - 1] === mathOperators[i]) {
+      if (input[input.length - 1] === mathOperators[i] || input === "") {
         setInput("0.");
         setOperations(operations + input);
       }
     }
-
     if (operations[operations.length - 1] === "=") {
       setInput("0.");
       setOperations("");
@@ -100,7 +89,6 @@ export const Calculator: React.FC = () => {
         setOperations(operations + input + "=");
         setInput(math.evaluate(operations + input).toString());
       }
-
       if (operations.indexOf("=") !== -1) {
         return null;
       }
@@ -111,7 +99,6 @@ export const Calculator: React.FC = () => {
         setInput(math.evaluate(operations).toString());
       }
     }
-
     if (input[input.length - 1] === ".") {
       setOperations(operations + input.substring(0, input.length - 1) + "=");
       setInput(
@@ -127,11 +114,19 @@ export const Calculator: React.FC = () => {
     setOperations("");
   };
 
+  const checkInputLength = () => {
+    if (input.length > 10 && input[input.length - 1] !== "=") {
+      let inputLimit = input.substring(0, 10);
+      setInput(inputLimit);
+    }
+  };
+  checkInputLength();
+
   return (
     <div className="calculator">
       <Title name={name} onNameChange={nameChangeHandler} maxLength={18} />
       <div className="calc-container">
-        <Display operations={operations} input={input} />
+        <Display input={input} operations={operations} />
         <ButtonWrapper
           symbols={symbols}
           numbers={numbers}
