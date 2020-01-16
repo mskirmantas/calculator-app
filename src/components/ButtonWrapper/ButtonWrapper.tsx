@@ -1,7 +1,7 @@
 import React from "react";
-import { NumberButtons } from "./NumberButtons";
-import { OperatorButtons } from "./OperatorButtons";
-import { ClearButton } from "./ClearButton";
+import { NumberButtons } from "./Buttons/NumberButtons";
+import { OperatorButtons } from "./Buttons/OperatorButtons";
+import { ClearButton } from "./Buttons/ClearButton";
 
 export interface ButtonWrapperProps {
   numbers: number[];
@@ -10,7 +10,6 @@ export interface ButtonWrapperProps {
   handleNumberClick: (val: number) => void;
   handleOperatorClick: (val: string) => void;
   handleDotClick: () => void;
-  handleClearLast: () => void;
   handleClear: () => void;
   handleEqual: () => void | null;
 }
@@ -24,7 +23,6 @@ export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
           symbols={props.symbols}
           onNumberClick={props.handleNumberClick}
           onDotClick={props.handleDotClick}
-          onClearLastClick={props.handleClearLast}
         />
         <ClearButton
           symbols={props.symbols}

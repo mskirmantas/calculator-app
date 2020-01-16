@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../App.scss";
 import { Title } from "./Title/Title";
-import { Input } from "./Input/Input";
-import { ButtonWrapper } from "./Buttons/ButtonWrapper";
+import { Display } from "./Display/Display";
+import { ButtonWrapper } from "./ButtonWrapper/ButtonWrapper";
 import * as math from "mathjs";
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
@@ -13,7 +13,6 @@ export const Calculator: React.FC = () => {
   const [name, setName] = useState<string>("Mantas' Calculator");
   const [input, setInput] = useState<string>("");
   const [operations, setOperations] = useState<string>("");
-  const [result, setResult] = useState<string>("");
 
   const nameChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     const { value, maxLength }: any = event.target;
@@ -22,12 +21,9 @@ export const Calculator: React.FC = () => {
     clearDisplay();
   };
 
-  // MATH ACTIONS ===========================================
-
   const addNumber = (val: number) => {
     setInput(input + val);
 
-    //kai inputas tuscias arba lygus 0
     if (input === "" || input === "0") {
       setInput("" + val);
     }
@@ -36,12 +32,10 @@ export const Calculator: React.FC = () => {
       setInput("" + val);
     }
 
-    //kai pries tai buvo taskas
     if (input[input.length - 1] === ".") {
       setInput(input + val);
     }
 
-    //kai pries tai buvo operatorius
     for (let i = 0; i < mathOperators.length; i++) {
       if (input[input.length - 1] === mathOperators[i]) {
         setInput("" + val);
@@ -51,25 +45,24 @@ export const Calculator: React.FC = () => {
   };
 
   const addOperator = (val: string) => {
-    //kai pries tai buvo skaicius
     for (let i = 0; i < numbers.length; i++) {
       if (input[input.length - 1] === numbers[i].toString()) {
         setInput(val);
         setOperations(operations + input);
       }
     }
-    // kai pries tai buvo operatorius
+
     for (let k = 0; k < mathOperators.length; k++) {
       if (input[input.length - 1] === mathOperators[k]) {
         setInput(input.substring(0, input.length - 1) + val);
       }
     }
-    // kai pries tai buvo taskas
+
     if (input[input.length - 1] === ".") {
       setOperations(operations + input.substring(0, input.length - 1));
       setInput(val);
     }
-    // kai pries tai buvo paskaiciuotas rezultatas
+
     if (operations[operations.length - 1] === "=") {
       setInput(val);
       setOperations(input);
@@ -129,43 +122,16 @@ export const Calculator: React.FC = () => {
     }
   };
 
-  const clearLastValue = () => {
-    setInput(input.substring(0, input.length - 1));
-  };
-  console.log(input);
-
   const clearDisplay = () => {
     setInput("");
     setOperations("");
-    // setResult("");
   };
-
-  // CHECK LENGTH ===========================================
-
-  // const checkInputLength = (val: string, charLength: number) => {
-  //   if (val.length > charLength) {
-  //     let inputLimit = val.substring(0, charLength);
-  //     setInput(inputLimit);
-  //   }
-  // };
-  // checkInputLength(input, 5);
-
-  // const errorMesagge: string = "Error";
-
-  // const checkResultLength = (val: string, charLength: number) => {
-  //   if (val.length > charLength && val !== errorMesagge) {
-  //     setResult(errorMesagge);
-  //     setInput("");
-  //   }
-  // };
-  // checkResultLength(result, 8);
 
   return (
     <div className="calculator">
       <Title name={name} onNameChange={nameChangeHandler} maxLength={18} />
       <div className="calc-container">
-        {/* reikia pakeist! ------> */}
-        <Input input={operations} result={input} />
+        <Display operations={operations} input={input} />
         <ButtonWrapper
           symbols={symbols}
           numbers={numbers}
@@ -174,7 +140,6 @@ export const Calculator: React.FC = () => {
           handleOperatorClick={addOperator}
           handleDotClick={addDot}
           handleClear={clearDisplay}
-          handleClearLast={clearLastValue}
           handleEqual={calculateResult}
         />
       </div>

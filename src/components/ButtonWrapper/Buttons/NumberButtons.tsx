@@ -6,7 +6,6 @@ interface NumberBtnProps {
   symbols: string[];
   onNumberClick: (val: number) => void;
   onDotClick: () => void;
-  onClearLastClick: () => void;
 }
 
 export const NumberButtons: React.FC<NumberBtnProps> = props => {
@@ -27,14 +26,6 @@ export const NumberButtons: React.FC<NumberBtnProps> = props => {
           return (
             <CalcButton key={symbol} char={symbol} onClick={props.onDotClick} />
           );
-        // else if (symbol === "C")
-        //   return (
-        //     <CalcButton
-        //       key={symbol}
-        //       char={symbol}
-        //       onClick={props.onClearLastClick}
-        //     />
-        //   );
         else {
           return null;
         }
