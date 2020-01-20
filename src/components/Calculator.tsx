@@ -29,12 +29,14 @@ export const Calculator: React.FC = () => {
     if (input[input.length - 1] === ".") {
       setInput(input + val);
     }
-    for (let i = 0; i < mathOperators.length; i++) {
-      if (input[input.length - 1] === mathOperators[i]) {
+
+    mathOperators.forEach(mathOperator => {
+      if (input[input.length - 1] === mathOperator) {
         setInput("" + val);
         setOperations(operations + input);
       }
-    }
+    });
+
     if (operations[operations.length - 1] === "=") {
       setOperations("");
       setInput("" + val);
@@ -42,17 +44,19 @@ export const Calculator: React.FC = () => {
   };
 
   const addOperator = (val: string) => {
-    for (let i = 0; i < numbers.length; i++) {
-      if (input[input.length - 1] === numbers[i].toString()) {
+    numbers.forEach(number => {
+      if (input[input.length - 1] === number.toString()) {
         setInput(val);
         setOperations(operations + input);
       }
-    }
-    for (let k = 0; k < mathOperators.length; k++) {
-      if (input[input.length - 1] === mathOperators[k]) {
+    });
+
+    mathOperators.forEach(mathOperator => {
+      if (input[input.length - 1] === mathOperator) {
         setInput(input.substring(0, input.length - 1) + val);
       }
-    }
+    });
+
     if (input[input.length - 1] === ".") {
       setInput(val);
       setOperations(operations + input.substring(0, input.length - 1));
@@ -71,12 +75,13 @@ export const Calculator: React.FC = () => {
     if (input.indexOf(".") === -1) {
       setInput(input + ".");
     }
-    for (let i = 0; i < mathOperators.length; i++) {
-      if (input[input.length - 1] === mathOperators[i] || input === "") {
+    mathOperators.forEach(mathOperator => {
+      if (input[input.length - 1] === mathOperator || input === "") {
         setInput("0.");
         setOperations(operations + input);
       }
-    }
+    });
+
     if (operations[operations.length - 1] === "=") {
       setInput("0.");
       setOperations("");
@@ -84,21 +89,23 @@ export const Calculator: React.FC = () => {
   };
 
   const calculateResult = () => {
-    for (let i = 0; i < numbers.length; i++) {
-      if (input !== "" && input[input.length - 1] === numbers[i].toString()) {
+    if (operations.indexOf("=") !== -1) {
+      return null;
+    }
+    numbers.forEach(number => {
+      if (input[input.length - 1] === number.toString() && input !== "") {
         setOperations(operations + input + "=");
         setInput(math.evaluate(operations + input).toString());
       }
-      if (operations.indexOf("=") !== -1) {
-        return null;
-      }
-    }
-    for (let k = 0; k < mathOperators.length; k++) {
-      if (input[input.length - 1] === mathOperators[k]) {
+    });
+
+    mathOperators.forEach(mathOperator => {
+      if (input[input.length - 1] === mathOperator) {
         setOperations(operations + "=");
         setInput(math.evaluate(operations).toString());
       }
-    }
+    });
+
     if (input[input.length - 1] === ".") {
       setOperations(operations + input.substring(0, input.length - 1) + "=");
       setInput(
