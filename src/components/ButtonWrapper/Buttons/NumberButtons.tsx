@@ -1,14 +1,17 @@
 import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
-interface NumberBtnProps {
-  numbers: number[];
-  symbols: string[];
-  onNumberClick: (val: number) => void;
+interface INumberBtnProps {
+  numbers: Number[];
+  symbols: CalcSymbol[];
+  onNumberClick: (val: Number) => void;
   onDotClick: () => void;
 }
 
-export const NumberButtons: React.FC<NumberBtnProps> = props => {
+type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0;
+type CalcSymbol = "." | "AC";
+
+export const NumberButtons: React.FC<INumberBtnProps> = props => {
   return (
     <div className="NumberButtons">
       {props.numbers.map(number => {

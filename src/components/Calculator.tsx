@@ -5,9 +5,19 @@ import { Display } from "./Display/Display";
 import { ButtonWrapper } from "./ButtonWrapper/ButtonWrapper";
 import * as math from "mathjs";
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const symbols = [".", "AC"];
-const mathOperators = ["+", "-", "*", "/", "="];
+export interface IProps {
+  numbers: Number[];
+  symbols: CalcSymbol[];
+  mathOperators: MathOperator[];
+}
+
+type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0;
+type CalcSymbol = "." | "AC";
+type MathOperator = "+" | "-" | "*" | "/" | "=";
+
+const numbers: Number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const symbols: CalcSymbol[] = [".", "AC"];
+const mathOperators: MathOperator[] = ["+", "-", "*", "/", "="];
 
 export const Calculator: React.FC = () => {
   const [name, setName] = useState<string>("Mantas' Calculator");
@@ -24,7 +34,7 @@ export const Calculator: React.FC = () => {
     handleClearDisplay();
   };
 
-  const handleAddNumber = (val: number) => {
+  const handleAddNumber = (val: Number) => {
     setInput(input + val);
     if (input === "" || input === "0") {
       setInput("" + val);
@@ -46,7 +56,7 @@ export const Calculator: React.FC = () => {
     }
   };
 
-  const handleAddOperator = (val: string) => {
+  const handleAddOperator = (val: MathOperator) => {
     numbers.forEach(number => {
       if (input[input.length - 1] === number.toString()) {
         setInput(val);

@@ -1,12 +1,14 @@
 import React from "react";
 import { CalcButton } from "./CalcButton/CalcButton";
 
-interface ClearButtonProps {
-  symbols: string[];
+interface IClearButtonProps {
+  symbols: CalcSymbol[];
   onButtonClick: () => void;
 }
 
-export const ClearButton: React.FC<ClearButtonProps> = props => (
+type CalcSymbol = "." | "AC";
+
+export const ClearButton: React.FC<IClearButtonProps> = props => (
   <div className="ClearButton">
     {props.symbols.map(symbol => {
       if (symbol === "AC")

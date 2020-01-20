@@ -3,18 +3,22 @@ import { NumberButtons } from "./Buttons/NumberButtons";
 import { OperatorButtons } from "./Buttons/OperatorButtons";
 import { ClearButton } from "./Buttons/ClearButton";
 
-export interface ButtonWrapperProps {
-  numbers: number[];
-  mathOperators: string[];
-  symbols: string[];
-  onNumberClick: (val: number) => void;
-  onOperatorClick: (val: string) => void;
+interface IButtonWrapperProps {
+  numbers: Number[];
+  mathOperators: MathOperator[];
+  symbols: CalcSymbol[];
+  onNumberClick: (val: Number) => void;
+  onOperatorClick: (val: MathOperator) => void;
   onDotClick: () => void;
   onEqualClick: () => void | null;
   onClearClick: () => void;
 }
 
-export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
+type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0;
+type CalcSymbol = "." | "AC";
+type MathOperator = "+" | "-" | "*" | "/" | "=";
+
+export const ButtonWrapper: React.FC<IButtonWrapperProps> = props => {
   return (
     <div className="ButtonWrapper">
       <div>
