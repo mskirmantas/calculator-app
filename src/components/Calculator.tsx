@@ -14,9 +14,12 @@ export const Calculator: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [operations, setOperations] = useState<string>("");
 
-  const nameChangeHandler = (event: React.FormEvent<HTMLInputElement>) => {
-    const { value, maxLength }: any = event.target;
-    const newName = value.slice(0, maxLength);
+  const nameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      value,
+      maxLength
+    }: { value: string | number; maxLength: number } = event.target;
+    const newName = value.toString().substring(0, maxLength);
     setName(newName);
     clearDisplay();
   };
