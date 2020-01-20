@@ -14,17 +14,17 @@ export const Calculator: React.FC = () => {
   const [input, setInput] = useState<string>("");
   const [operations, setOperations] = useState<string>("");
 
-  const nameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       value,
       maxLength
     }: { value: string | number; maxLength: number } = event.target;
     const newName = value.toString().substring(0, maxLength);
     setName(newName);
-    clearDisplay();
+    handleClearDisplay();
   };
 
-  const addNumber = (val: number) => {
+  const handleAddNumber = (val: number) => {
     setInput(input + val);
     if (input === "" || input === "0") {
       setInput("" + val);
@@ -46,7 +46,7 @@ export const Calculator: React.FC = () => {
     }
   };
 
-  const addOperator = (val: string) => {
+  const handleAddOperator = (val: string) => {
     numbers.forEach(number => {
       if (input[input.length - 1] === number.toString()) {
         setInput(val);
@@ -74,7 +74,7 @@ export const Calculator: React.FC = () => {
     }
   };
 
-  const addDot = () => {
+  const handleAddDot = () => {
     if (input.indexOf(".") === -1) {
       setInput(input + ".");
     }
@@ -91,7 +91,7 @@ export const Calculator: React.FC = () => {
     }
   };
 
-  const calculateResult = () => {
+  const handleCalculateResult = () => {
     if (operations.indexOf("=") !== -1) {
       return null;
     }
@@ -119,7 +119,7 @@ export const Calculator: React.FC = () => {
     }
   };
 
-  const clearDisplay = () => {
+  const handleClearDisplay = () => {
     setInput("");
     setOperations("");
   };
@@ -134,18 +134,18 @@ export const Calculator: React.FC = () => {
 
   return (
     <div className="container">
-      <Title name={name} onNameChange={nameChangeHandler} maxLength={18} />
+      <Title name={name} onNameChange={handleNameChange} maxLength={18} />
       <div className="calculator">
         <Display input={input} operations={operations} />
         <ButtonWrapper
           symbols={symbols}
           numbers={numbers}
           mathOperators={mathOperators}
-          handleNumberClick={addNumber}
-          handleOperatorClick={addOperator}
-          handleDotClick={addDot}
-          handleClear={clearDisplay}
-          handleEqual={calculateResult}
+          onNumberClick={handleAddNumber}
+          onOperatorClick={handleAddOperator}
+          onDotClick={handleAddDot}
+          onEqualClick={handleCalculateResult}
+          onClearClick={handleClearDisplay}
         />
       </div>
     </div>

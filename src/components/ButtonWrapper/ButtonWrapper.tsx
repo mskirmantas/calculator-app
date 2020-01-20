@@ -7,11 +7,11 @@ export interface ButtonWrapperProps {
   numbers: number[];
   mathOperators: string[];
   symbols: string[];
-  handleNumberClick: (val: number) => void;
-  handleOperatorClick: (val: string) => void;
-  handleDotClick: () => void;
-  handleClear: () => void;
-  handleEqual: () => void | null;
+  onNumberClick: (val: number) => void;
+  onOperatorClick: (val: string) => void;
+  onDotClick: () => void;
+  onEqualClick: () => void | null;
+  onClearClick: () => void;
 }
 
 export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
@@ -21,18 +21,18 @@ export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
         <NumberButtons
           numbers={props.numbers}
           symbols={props.symbols}
-          onNumberClick={props.handleNumberClick}
-          onDotClick={props.handleDotClick}
+          onNumberClick={props.onNumberClick}
+          onDotClick={props.onDotClick}
         />
         <ClearButton
           symbols={props.symbols}
-          onButtonClick={props.handleClear}
+          onButtonClick={props.onClearClick}
         />
       </div>
       <OperatorButtons
         mathOperators={props.mathOperators}
-        onOperatorButtonClick={props.handleOperatorClick}
-        onShowResultClick={props.handleEqual}
+        onOperatorButtonClick={props.onOperatorClick}
+        onShowResultClick={props.onEqualClick}
       />
     </div>
   );
