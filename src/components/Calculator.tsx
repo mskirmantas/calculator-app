@@ -133,7 +133,12 @@ export const Calculator: React.FC<INameChangeProps> = props => {
       setInput(inputLimit);
     }
   };
-  checkInputLength();
+
+  useEffect(() => {
+    if (input.length > 1) {
+      checkInputLength();
+    }
+  });
 
   return (
     <div className="container">
