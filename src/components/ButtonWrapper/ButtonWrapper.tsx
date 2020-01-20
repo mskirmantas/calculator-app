@@ -6,7 +6,7 @@ import { ClearButton } from "./Buttons/ClearButton";
 interface IButtonWrapperProps {
   numbers: Number[];
   mathOperators: MathOperator[];
-  symbols: CalcSymbol[];
+  calcSymbols: CalcSymbol[];
   onNumberClick: (val: Number) => void;
   onOperatorClick: (val: MathOperator) => void;
   onDotClick: () => void;
@@ -24,12 +24,12 @@ export const ButtonWrapper: React.FC<IButtonWrapperProps> = props => {
       <div>
         <NumberButtons
           numbers={props.numbers}
-          symbols={props.symbols}
+          calcSymbols={props.calcSymbols}
           onNumberClick={props.onNumberClick}
           onDotClick={props.onDotClick}
         />
         <ClearButton
-          symbols={props.symbols}
+          calcSymbols={props.calcSymbols}
           onButtonClick={props.onClearClick}
         />
       </div>

@@ -1,14 +1,13 @@
 import React from "react";
 
-interface CalcButtonProps {
-  char: number | string;
+interface ICalcButtonProps {
   onClick: () => void;
 }
 
-export const CalcButton: React.FC<CalcButtonProps> = props => {
+export const CalcButton: React.FC<ICalcButtonProps> = props => {
   return (
     <div className="calc-button" onClick={props.onClick}>
-      {props.char}
+      {props.children}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import * as math from "mathjs";
 
 export interface IProps {
   numbers: Number[];
-  symbols: CalcSymbol[];
+  calcSymbols: CalcSymbol[];
   mathOperators: MathOperator[];
 }
 
@@ -16,7 +16,7 @@ type CalcSymbol = "." | "AC";
 type MathOperator = "+" | "-" | "*" | "/" | "=";
 
 const numbers: Number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const symbols: CalcSymbol[] = [".", "AC"];
+const calcSymbols: CalcSymbol[] = [".", "AC"];
 const mathOperators: MathOperator[] = ["+", "-", "*", "/", "="];
 
 export const Calculator: React.FC = () => {
@@ -148,7 +148,7 @@ export const Calculator: React.FC = () => {
       <div className="calculator">
         <Display input={input} operations={operations} />
         <ButtonWrapper
-          symbols={symbols}
+          calcSymbols={calcSymbols}
           numbers={numbers}
           mathOperators={mathOperators}
           onNumberClick={handleAddNumber}

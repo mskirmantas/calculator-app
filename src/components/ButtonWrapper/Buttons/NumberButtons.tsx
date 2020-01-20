@@ -3,7 +3,7 @@ import { CalcButton } from "./CalcButton/CalcButton";
 
 interface INumberBtnProps {
   numbers: Number[];
-  symbols: CalcSymbol[];
+  calcSymbols: CalcSymbol[];
   onNumberClick: (val: Number) => void;
   onDotClick: () => void;
 }
@@ -16,18 +16,18 @@ export const NumberButtons: React.FC<INumberBtnProps> = props => {
     <div className="NumberButtons">
       {props.numbers.map(number => {
         return (
-          <CalcButton
-            key={number}
-            char={number}
-            onClick={() => props.onNumberClick(number)}
-          />
+          <CalcButton key={number} onClick={() => props.onNumberClick(number)}>
+            {number}
+          </CalcButton>
         );
       })}
 
-      {props.symbols.map(symbol => {
-        if (symbol === ".")
+      {props.calcSymbols.map(calcSymbol => {
+        if (calcSymbol === ".")
           return (
-            <CalcButton key={symbol} char={symbol} onClick={props.onDotClick} />
+            <CalcButton key={calcSymbol} onClick={props.onDotClick}>
+              {calcSymbol}
+            </CalcButton>
           );
         else {
           return null;

@@ -16,17 +16,16 @@ export const OperatorButtons: React.FC<IOperatorBtnProps> = props => {
           return (
             <CalcButton
               key={mathOperator}
-              char={mathOperator}
               onClick={() => props.onOperatorButtonClick(mathOperator)}
-            />
+            >
+              {mathOperator}
+            </CalcButton>
           );
         } else if (mathOperator === "=") {
           return (
-            <CalcButton
-              key={mathOperator}
-              char={mathOperator}
-              onClick={props.onShowResultClick}
-            />
+            <CalcButton key={mathOperator} onClick={props.onShowResultClick}>
+              {mathOperator}
+            </CalcButton>
           );
         } else {
           return null;
