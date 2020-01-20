@@ -40,13 +40,13 @@ export const Calculator: React.FC = () => {
       setInput("" + val);
     }
     if (input[input.length - 1] === ".") {
-      setInput(input + val);
+      setInput(prevInput => prevInput + val);
     }
 
     mathOperators.forEach(mathOperator => {
       if (input[input.length - 1] === mathOperator) {
         setInput("" + val);
-        setOperations(operations + input);
+        setOperations(prevOperations => prevOperations + input);
       }
     });
 
@@ -60,7 +60,7 @@ export const Calculator: React.FC = () => {
     numbers.forEach(number => {
       if (input[input.length - 1] === number.toString()) {
         setInput(val);
-        setOperations(operations + input);
+        setOperations(prevOperations => prevOperations + input);
       }
     });
 
@@ -72,26 +72,24 @@ export const Calculator: React.FC = () => {
 
     if (input[input.length - 1] === ".") {
       setInput(val);
-      setOperations(operations + input.substring(0, input.length - 1));
+      setOperations(
+        prevOperations => prevOperations + input.substring(0, input.length - 1)
+      );
     }
     if (operations[operations.length - 1] === "=") {
       setInput(val);
       setOperations(input);
     }
-    if (input === "Infinity" || input === "-Infinity") {
-      setInput("");
-      setOperations("");
-    }
   };
 
   const handleAddDot = () => {
     if (input.indexOf(".") === -1) {
-      setInput(input + ".");
+      setInput(prevInput => prevInput + ".");
     }
     mathOperators.forEach(mathOperator => {
       if (input[input.length - 1] === mathOperator || input === "") {
         setInput("0.");
-        setOperations(operations + input);
+        setOperations(prevOperations => prevOperations + input);
       }
     });
 
@@ -107,20 +105,23 @@ export const Calculator: React.FC = () => {
     }
     numbers.forEach(number => {
       if (input[input.length - 1] === number.toString() && input !== "") {
-        setOperations(operations + input + "=");
+        setOperations(prevOperations => prevOperations + input + "=");
         setInput(math.evaluate(operations + input).toString());
       }
     });
 
     mathOperators.forEach(mathOperator => {
       if (input[input.length - 1] === mathOperator) {
-        setOperations(operations + "=");
+        setOperations(prevOperations => prevOperations + "=");
         setInput(math.evaluate(operations).toString());
       }
     });
 
     if (input[input.length - 1] === ".") {
-      setOperations(operations + input.substring(0, input.length - 1) + "=");
+      setOperations(
+        prevOperations =>
+          prevOperations + input.substring(0, input.length - 1) + "="
+      );
       setInput(
         math
           .evaluate(operations + input.substring(0, input.length - 1))
