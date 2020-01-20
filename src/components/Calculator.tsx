@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.scss";
 import { Title } from "./Title/Title";
 import { Display } from "./Display/Display";
 import { ButtonWrapper } from "./ButtonWrapper/ButtonWrapper";
 import * as math from "mathjs";
 
-export interface IProps {
-  numbers: Number[];
-  calcSymbols: CalcSymbol[];
-  mathOperators: MathOperator[];
+interface INameChangeProps {
+  name: string;
+  onNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0;
@@ -19,20 +18,9 @@ const numbers: Number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const calcSymbols: CalcSymbol[] = [".", "AC"];
 const mathOperators: MathOperator[] = ["+", "-", "*", "/", "="];
 
-export const Calculator: React.FC = () => {
-  const [name, setName] = useState<string>("Mantas' Calculator");
+export const Calculator: React.FC<INameChangeProps> = props => {
   const [input, setInput] = useState<string>("");
   const [operations, setOperations] = useState<string>("");
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      value,
-      maxLength
-    }: { value: string | number; maxLength: number } = event.target;
-    const newName = value.toString().substring(0, maxLength);
-    setName(newName);
-    handleClearDisplay();
-  };
 
   const handleAddNumber = (val: Number) => {
     setInput(input + val);
@@ -135,6 +123,10 @@ export const Calculator: React.FC = () => {
     setOperations("");
   };
 
+  useEffect(() => {
+    handleClearDisplay();
+  }, [props.name]);
+
   const checkInputLength = () => {
     if (input.length > 10 && input[input.length - 1] !== "=") {
       let inputLimit = input.substring(0, 10);
@@ -145,7 +137,11 @@ export const Calculator: React.FC = () => {
 
   return (
     <div className="container">
-      <Title name={name} onNameChange={handleNameChange} maxLength={18} />
+      <Title
+        name={props.name}
+        onNameChange={props.onNameChange}
+        maxLength={18}
+      />
       <div className="calculator">
         <Display input={input} operations={operations} />
         <ButtonWrapper
