@@ -1,3 +1,8 @@
+![](images/calc-1.PNG)
+![](images/calc-2.PNG)
+ 
+ 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
