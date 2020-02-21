@@ -5,7 +5,7 @@ import { Display } from "./Display/Display";
 import { ButtonWrapper } from "./ButtonWrapper/ButtonWrapper";
 import * as math from "mathjs";
 
-interface INameChangeProps {
+interface NameChangeProps {
   name: string;
   onNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -18,7 +18,7 @@ const numbers: Number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const calcSymbols: CalcSymbol[] = [".", "AC"];
 const mathOperators: MathOperator[] = ["+", "-", "*", "/", "="];
 
-export const Calculator: React.FC<INameChangeProps> = props => {
+export const Calculator: React.FC<NameChangeProps> = props => {
   const [input, setInput] = useState<string>("");
   const [operations, setOperations] = useState<string>("");
 
@@ -26,9 +26,6 @@ export const Calculator: React.FC<INameChangeProps> = props => {
     setInput(input + val);
     if (input === "" || input === "0") {
       setInput("" + val);
-    }
-    if (input[input.length - 1] === ".") {
-      setInput(prevInput => prevInput + val);
     }
 
     mathOperators.forEach(mathOperator => {

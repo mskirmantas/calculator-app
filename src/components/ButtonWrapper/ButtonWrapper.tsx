@@ -3,7 +3,7 @@ import { NumberButtons } from "./Buttons/NumberButtons";
 import { OperatorButtons } from "./Buttons/OperatorButtons";
 import { ClearButton } from "./Buttons/ClearButton";
 
-interface IButtonWrapperProps {
+interface ButtonWrapperProps {
   numbers: Number[];
   mathOperators: MathOperator[];
   calcSymbols: CalcSymbol[];
@@ -18,7 +18,7 @@ type Number = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0;
 type CalcSymbol = "." | "AC";
 type MathOperator = "+" | "-" | "*" | "/" | "=";
 
-export const ButtonWrapper: React.FC<IButtonWrapperProps> = props => {
+export const ButtonWrapper: React.FC<ButtonWrapperProps> = props => {
   return (
     <div className="ButtonWrapper">
       <div>
