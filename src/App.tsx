@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Calculator } from "./components/Calculator";
-import { Requirements } from "./components/Requirements";
+
 import "./App.scss";
 
 const App: React.FC = () => {
-  const initialName: string = "Mantas' Calculator";
+  const initialName: string = "React Calculator";
   const [name, setName] = useState<string>(initialName);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,9 +17,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="content">
+    <div className="App">
       <Calculator name={name} onNameChange={handleNameChange} />
-      <Requirements />
     </div>
   );
 };
