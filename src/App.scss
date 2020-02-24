@@ -1,8 +1,9 @@
 $btn-color: rgb(214, 214, 214);
+$color-grey: rgb(173, 173, 173);
 $operator-btn-color: rgb(219, 155, 52);
 $clear-btn-color: rgb(90, 144, 189);
 $active-btn-color: rgb(61, 64, 68);
-$display-color: rgb(36, 36, 36);
+$display-color: rgb(34, 34, 34);
 $color-dark: rgb(41, 41, 41);
 $color-bright: rgb(250, 250, 250);
 $color-operations: rgb(167, 173, 179);
@@ -51,6 +52,9 @@ h2 {
   justify-content: space-around;
   height: 30px;
   width: 328px;
+  h2 {
+    color: $color-grey;
+  }
 }
 
 // DISPLAY ----------------------
@@ -100,8 +104,9 @@ h2 {
     color: $color-operations;
     margin: 0;
     padding: 15px 20px;
-    letter-spacing: 0.01em;
-    font-size: 1.4rem;
+    font-family: sans-serif;
+    letter-spacing: 0.025em;
+    font-size: 1.2rem;
     font-weight: 400;
   }
 }
@@ -139,6 +144,9 @@ h2 {
   width: 246px;
   display: flex;
   flex-wrap: wrap;
+  .calc-button {
+    font-size: 1.3rem;
+  }
   :last-child {
     width: 162px;
   }
