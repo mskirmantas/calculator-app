@@ -1,6 +1,6 @@
 # React Calculator App
 
-A simple calculator app created using **React** + **Hooks** + **Typescript**
+A simple calculator app created using **React** + **Hooks** + **Typescript**. Try it live on react-calculator-app.netlify.com
 
 ![](img/calc-1.PNG)
 
