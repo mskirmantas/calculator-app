@@ -8,7 +8,7 @@
     "@types/node": "^12.12.21",
     "@types/react": "16.8.18",
     "@types/react-dom": "16.8.4",
-    "mathjs": "^6.5.0",
+    "mathjs": "^7.5.1",
     "node-sass": "4.12.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
